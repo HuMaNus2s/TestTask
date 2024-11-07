@@ -62,15 +62,21 @@ def search_products(keywords):
         products.sort(key=lambda x: x["score"], reverse=True)
         
         for product in products:
-            print(f"\nНазвание продукта: {product['name']} | id: {product['product_id']}")
-            print(f"Описание:\n{product['description']}")
-            print(f"Теги: {product['tags']}")
-            print(f"Найдено в описании: {product['found_in_description']}")
-            print(f"Найдено в тегах: {product['found_in_tags']}")
-            print(f"Общее количество очков: {product['score']}\n")
-        
+            #тестовое изменение (amberGO)
+            print(f"\nНазвание продукта: {product['name']} | id: {product['product_id']}\nОписание:\n{product['description']}\nТеги: {product['tags']}\n
+            Найдено в описании: {product['found_in_description']}\nНайдено в тегах: {product['found_in_tags']}\nОбщее количество очков: {product['score']}\n")
+            
+           # print(f"\nНазвание продукта: {product['name']} | id: {product['product_id']}")
+           # print(f"Описание:\n{product['description']}")
+           # print(f"Теги: {product['tags']}")
+           # print(f"Найдено в описании: {product['found_in_description']}")
+           # print(f"Найдено в тегах: {product['found_in_tags']}")
+           # print(f"Общее количество очков: {product['score']}\n")
+       
         
 while(True):
     keyword = input("Введите ключевое слово для поиска: ")
     search_products(keyword)
-    print("=========================================================================")
+    #Я тут принт поменял, на более короткий (AmberGO)
+    #print("=========================================================================")
+    print("=" * 73)
