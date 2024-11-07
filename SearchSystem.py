@@ -63,8 +63,7 @@ def search_products(keywords):
         
         for product in products:
             #тестовое изменение (amberGO)
-            print(f"\nНазвание продукта: {product['name']} | id: {product['product_id']}\nОписание:\n{product['description']}\nТеги: {product['tags']}\n
-            Найдено в описании: {product['found_in_description']}\nНайдено в тегах: {product['found_in_tags']}\nОбщее количество очков: {product['score']}\n")
+            print(f"\nНазвание продукта: {product['name']} | id: {product['product_id']}\nОписание:\n{product['description']}\nТеги: {product['tags']}\nНайдено в описании: {product['found_in_description']}\nНайдено в тегах: {product['found_in_tags']}\nОбщее количество очков: {product['score']}\n")
             
            # print(f"\nНазвание продукта: {product['name']} | id: {product['product_id']}")
            # print(f"Описание:\n{product['description']}")
