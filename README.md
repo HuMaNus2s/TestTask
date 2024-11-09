@@ -1,5 +1,3 @@
-### README
-
 #### 1. Описание проекта
 Данный проект представляет собой API для управления задачами, разработанный на Python с использованием Flask, SQLAlchemy и Swagger. API позволяет пользователям создавать, просматривать, обновлять и удалять задачи, а также предоставляет возможность фильтрации задач по статусу и дате выполнения.
 
@@ -43,57 +41,47 @@ python app.py
 ###### 1. Создание задачи
 - **Запрос**:
     ```bash
-    curl -X POST "http://127.0.0.1:5000/Tasks" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"description\": \"Новая задача из API\", \"due_date\": \"2000-11-09\", \"status\": \"в процессе\", \"title\": \"Новая задача\"}"
+    curl -X POST /Tasks -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"description\": \"Новая задача из API\", \"due_date\": \"2000-11-09\", \"status\": \"в процессе\", \"title\": \"Новая задача\"}"
     ```
 - **Ответ**:
-    ```json
-    {
-      "description": "Новая задача из API",
-      "due_date": "2000-11-09",
-      "status": "в процессе",
-      "title": "Новая задача"
-   }
+    ```bash
+    /Tasks
     ```
 
 ###### 2. Получение списка задач с фильтрацией и пагинацией
 - **Запрос**:
-    ```plaintext
-    GET /tasks?status=выполнено&due_date=2024-12-31&page=1&size=10
+    ```bash
+    curl -X GET Tasks?status=выполнено&due_date=2024-12-31&page=1&size=10 -H "accept: application/json"
     ```
 - **Ответ**:
-    ```json
-    [
-      {
-        "title": "Задача 2",
-        "description": "Описание задачи 2",
-        "status": "выполнено",
-        "due_date": "2024-10-15"
-      }
-    ]
+    ```bash
+    /Tasks?status=выполнено&due_date=2024-12-31&page=1&size=10
     ```
 
-###### 3. Обновление задачи
+###### 3. Получение задачи по id
 - **Запрос**:
-    ```json
-    PUT /tasks/1
-    {
-      "status": "выполнено"
-    }
+    ```bash
+    curl -X GET /Tasks/{id} -H "accept: application/json"
     ```
 - **Ответ**:
-    ```json
-    {
-      "title": "Новая задача",
-      "description": "Описание задачи",
-      "status": "выполнено",
-      "due_date": "2024-11-10"
-    }
+    ```bash
+    http://127.0.0.1:5000/Tasks/{id}
     ```
 
-###### 4. Удаление задачи
+###### 4. Обновление задачи
+- **Запрос**:
+    ```bash
+    curl -X PUT /tasks/{id} -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"title\": \"Обновленная задача\", \"description\": \"Новое описание задачи\", \"status\": \"выполнено\", \"due_date\": \"2024-11-15\"}"
+    ```
+- **Ответ**:
+    ```bash
+    http://127.0.0.1:5000/Tasks/{id}
+    ```
+
+###### 5. Удаление задачи
 - **Запрос**:
     ```plaintext
-    DELETE /tasks/1
+    DELETE /tasks/{id}
     ```
 - **Ответ**:
     ```json
@@ -101,9 +89,3 @@ python app.py
       "message": "Задача удалена"
     }
     ```
-
-#### 5. Документация API
-Документация API автоматически генерируется Swagger. Чтобы просмотреть документацию, откройте в браузере: `http://127.0.0.1:5000/apidocs`
-
-#### 6. Тестовые данные
-Для проверки работы API при запуске приложения создаются три тестовые задачи.
