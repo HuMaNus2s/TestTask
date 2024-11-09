@@ -2,6 +2,7 @@ import csv
 import os
 
 filename = 'file.csv'
+
 def generator_words(word):
     endings = ['ый', 'ие', 'ого', 'ая', 'ое', 'ые', 'o']
     words = [word]
@@ -12,7 +13,7 @@ def generator_words(word):
              
          for ending in endings:
              words.append(base_word + ending)
-    return words      
+    return words       
 
 def found_keywords(options, keywords):
     founds = []
@@ -32,50 +33,50 @@ def search_products(keywords):
     keywords = keywords.replace(",", " ").lower().split()
     keywords = [k.lower() for k in keywords]
     products = []
+    
+    unique = set()
     print(f"Обнаруженные ключевые слова: {keywords}")
     
     with open(filename, newline="", encoding="utf-8") as file:
         read_csv = csv.reader(file)
         next(read_csv)
-        for product_id, name, description, tags in read_csv:         
-            score = 0
+        
+        for product_id, name, description, tags in read_csv:  
+            if product_id in unique:
+                continue
             
+            score = 0
             found_words_description = found_keywords(description, keywords)
             found_words_tags = found_keywords(tags, keywords)
-            print(found_words_description)
             
             for keyword in keywords:
                 if keyword in name.lower():
-                        score += 100                  
-                score += len(found_words_description) + len(found_words_tags)
-                
-                products.append({
-                    "product_id": product_id,
-                    "name": name,
-                    "description": description,
-                    "tags": tags,
-                    "score": score,
-                    "found_in_description": len(found_words_description),
-                    "found_in_tags": len(found_words_tags)
-                })
-                
+                    score += 100   
+            score += len(found_words_description) + len(found_words_tags)
+            
+            products.append({
+                "product_id": product_id,
+                "name": name,
+                "description": description,
+                "tags": tags,
+                "score": score,
+                "found_in_description": len(found_words_description),
+                "found_in_tags": len(found_words_tags)
+            })
+            
+            unique.add(product_id)
+        
         products.sort(key=lambda x: x["score"], reverse=True)
         
         for product in products:
-            #тестовое изменение (amberGO)
-            print(f"\nНазвание продукта: {product['name']} | id: {product['product_id']}\nОписание:\n{product['description']}\nТеги: {product['tags']}\nНайдено в описании: {product['found_in_description']}\nНайдено в тегах: {product['found_in_tags']}\nОбщее количество очков: {product['score']}\n")
-            
-           # print(f"\nНазвание продукта: {product['name']} | id: {product['product_id']}")
-           # print(f"Описание:\n{product['description']}")
-           # print(f"Теги: {product['tags']}")
-           # print(f"Найдено в описании: {product['found_in_description']}")
-           # print(f"Найдено в тегах: {product['found_in_tags']}")
-           # print(f"Общее количество очков: {product['score']}\n")
-       
-        
-while(True):
+            print(f"\nНазвание продукта: {product['name']} | id: {product['product_id']}")
+            print(f"Описание:\n{product['description']}")
+            print(f"Теги: {product['tags']}")
+            print(f"Найдено в описании: {product['found_in_description']}")
+            print(f"Найдено в тегах: {product['found_in_tags']}")
+            print(f"Общее количество очков: {product['score']}\n")
+
+while True:
     keyword = input("Введите ключевое слово для поиска: ")
     search_products(keyword)
-    #Я тут принт поменял, на более короткий (AmberGO)
-    #print("=========================================================================")
-    print("=" * 73)
+    print("=" * 51)
