@@ -18,7 +18,7 @@ pip install -r requirements.txt
 Для запуска приложения используйте команду:
 
 ```bash
-python search.py
+python SearchSystem.py
 ```
 
 Программа будет ожидать ввод ключевого слова для поиска товара в консоли.
