@@ -16,6 +16,7 @@ python TaskManager.py
 ```
 
 Приложение будет запущено по адресу: `http://127.0.0.1:5000`.
+Просмотр API интерфейса: `http://127.0.0.1:5000/apidocs/`. 
 
 ### 2. Структура базы данных
 База данных `SQLite` создается автоматически при первом запуске приложения. Она содержит одну таблицу `Tasks`, которая хранит следующие данные о задачах:
@@ -46,7 +47,7 @@ python TaskManager.py
     ```bash
     http://127.0.0.1:5000/Tasks
     ```
-- **или**
+- **JSON**
     ```json
     {
       "description": "Новая задача из API",
@@ -65,7 +66,7 @@ python TaskManager.py
     ```bash
     http://127.0.0.1:5000/Tasks?status=выполнено&due_date=2024-12-31&page=1&size=10
     ```
-- **или**
+- **JSON**
     ```json
     [
       {
@@ -86,7 +87,7 @@ python TaskManager.py
     ```bash
     http://127.0.0.1:5000/Tasks/{id}
     ```
-- **или**
+- **JSON**
     ```json
     {
       "description": "Описание задачи",
@@ -108,10 +109,14 @@ python TaskManager.py
 
 #### 5. Удаление задачи
 - **Запрос**:
-    ```plaintext
-    DELETE http://127.0.0.1:5000/Tasks/{id}
+    ```bash
+    curl -X DELETE "http://127.0.0.1:5000/Tasks/{id}" -H "accept: application/json"
     ```
 - **Ответ**:
+    ```bash
+    http://127.0.0.1:5000/Tasks/{id}
+    ```
+- **JSON**:
     ```json
     {
       "message": "Задача удалена"
